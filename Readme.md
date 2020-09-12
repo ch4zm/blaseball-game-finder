@@ -16,7 +16,7 @@ on conditions, including:
 
 ## Table of Contents
 
-* [Screenshots](#screenshots)
+* [Output Formats](#output-formats)
 * [Installation](#installation)
     * [pip](#pip)
     * [source](#source)
@@ -83,9 +83,9 @@ game-finder --season 4 --game 20 --team Sunbeams
 
 ## Quick Start
 
-The way this tool works is, it creates a data frame object, applies some filters to it based on command line flags provided
-by the user, then runs the data frame through a data viewer (which makes the nice tables). All command line flags can also 
-be specified in a config file.
+The way this tool works is, it creates a JSON data object, applies some filters to it based on command line flags
+provided by the user, then dumps the game IDs in the specified format. All command line flags can also be specified
+in a config file.
 
 ### Command line flags
 
@@ -122,18 +122,6 @@ Format options:
 Using a configuration file:
 
 * **Config file**: use the `-c` or `--config` file to point to a configuration file (see next section).
-
-
-######################################################################################
-######################################################################################
-######################################################################################
-##################   i stopped here    ###############################################
-######################################################################################
-######################################################################################
-######################################################################################
-
-
-
 
 
 ### Configuration file
@@ -248,7 +236,7 @@ json
 
 ## Software architecture
 
-This software consists of three parts:
+This software consists of two parts:
 
 * The command line flag and config file parser (uses `configargparse` library) - see `cli/command.py`
 * The BaseFormat object that provides a formatting layer to print out the JSON data in either
