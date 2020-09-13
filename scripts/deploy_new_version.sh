@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-PKG_NAME='blaseball_game_finder'
+PKG_NAME='game_finder'
 
 # bump version num in src code
 while test $# -gt 0; do

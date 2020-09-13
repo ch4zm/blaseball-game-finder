@@ -4,7 +4,7 @@ import re
 import argparse
 
 
-pkg_name = 'blaseball_game_finder'
+pkg_name = 'game_finder'
 
 
 def usage():
