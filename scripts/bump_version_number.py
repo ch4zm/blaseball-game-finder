@@ -3,12 +3,6 @@ import os
 import re
 import argparse
 
-"""
-This script bumps the minor version number.
-If your version number is 0.1, it will bump it to 0.2.
-If your version number is 0.0.1, it will bump it to 0.0.2.
-"""
-
 
 pkg_name = 'blaseball_game_finder'
 
