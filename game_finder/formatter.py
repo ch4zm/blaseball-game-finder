@@ -14,9 +14,8 @@ class BaseFormatter(object):
 
         # user provides one-indexed days and seasons
         # data has zero-indexed days and seasons
-        if options.season:
-            if 'all' not in options.seasons:
-                self.seasons = [str(int(j)-1) for j in options.season]
+        if 'all' not in options.season:
+            self.seasons = [str(int(j)-1) for j in options.season]
 
         if options.day:
             self.days = [str(int(j)-1) for j in options.day]
