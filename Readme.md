@@ -28,18 +28,20 @@ on conditions, including:
 * [Software architecture](#software-architecture)
 * [Who is this tool for?](#who-is-this-tool-for)
 * [Future work](#future-work)
-    * [Libraries used](#libraries-used)
+* [Libraries used](#libraries-used)
 
 
 ## Output Formats
 
-The blaseball-game-finder can output data in text format or json format.
+The `game-finder` utility can output data in text format or JSON format.
 
-The text format consists of game ID only, one game ID per line of output,
-printed to stdout. This is ideal for building pipes on the command line.
+Specifying the text output format is as easy as adding the `--text` flag,
+and outputs one game ID per line, nothing else:
 
-The json format consists of game ID, along with several other fields.
-(??)
+Specifying JSON output format can be done with the `--json` flag, and outputs
+a JSON object with information about the teams, odds, score, season, and day
+for each game that matches the criteria specified with the command line flags.
+
 
 ## Installation
 
