@@ -28,7 +28,7 @@ on conditions, including:
 * [Software architecture](#software-architecture)
 * [Who is this tool for?](#who-is-this-tool-for)
 * [Future work](#future-work)
-    * [Libraries used](#libraries-used)
+* [Libraries used](#libraries-used)
 
 
 ## Output Formats
