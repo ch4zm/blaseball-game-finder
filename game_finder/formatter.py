@@ -63,7 +63,7 @@ class BaseFormatter(object):
         # but first, write the loops explicitly
 
         # Seasons filter
-        if 'all' not in self.seasons:
+        if 'all' not in options.season:
             new_data = []
             for game in self.data:
                 if str(game['season']) in self.seasons:
