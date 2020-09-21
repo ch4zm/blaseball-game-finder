@@ -2,12 +2,14 @@ import sys
 import os
 import json
 import configargparse
+from io import StringIO
 from .formatter import TextFormatter, JsonFormatter
 from .util import (
     desanitize_dale,
     get_league_division_team_data,
     league_to_teams,
-    division_to_teams
+    division_to_teams,
+    CaptureStdout
 )
 
 
@@ -165,6 +167,12 @@ def main(sysargs = sys.argv[1:]):
     else:
         f = TextFormatter(options)
         f.output()
+
+
+def game_finder(sysargs):
+    with CaptureStdout() as so:
+        main(sysargs)
+    return str(so)
 
 
 if __name__ == '__main__':
