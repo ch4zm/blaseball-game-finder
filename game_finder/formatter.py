@@ -1,5 +1,5 @@
 import blaseball_core_game_data as gd
-from .util import sanitize_dale
+from .util import sanitize_dale, desanitize_dale
 import os
 import time
 import json
@@ -23,8 +23,8 @@ class BaseFormatter(object):
         else:
             self.days = None
 
-        self.our_team = [sanitize_dale(j) for j in options.team]
-        self.their_team = [sanitize_dale(j) for j in options.versus_team]
+        self.our_team = options.team
+        self.their_team = options.versus_team
 
         # data is a list of dictionaries
         # keys:
