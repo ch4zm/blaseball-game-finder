@@ -18,7 +18,7 @@ def main(sysargs = sys.argv[1:]):
     p = configargparse.ArgParser()
 
     # These are safe for command line usage (no accent in Dale)
-    LEAGUES, DIVISIONS, ALLTEAMS = get_league_division_team_data()
+    _, _, ALLTEAMS = get_league_division_team_data()
 
     p.add('-v',
           '--version',
@@ -34,50 +34,32 @@ def main(sysargs = sys.argv[1:]):
           help='config file path')
 
     # Pick our team
-    h = p.add_mutually_exclusive_group()
-    h.add('--team',
+    p.add('--team',
           choices=ALLTEAMS,
           action='append',
           help='Specify our team (use flag multiple times for multiple teams)')
-    h.add('--division',
-          choices=DIVISIONS,
-          action='append',
-          help='Specify our division (use flag multiple times for multiple divisions)')
-    h.add('--league',
-          choices=LEAGUES,
-          action='append',
-          help='Specify our league')
 
-    # Pick versus team
-    k = p.add_mutually_exclusive_group()
-    k.add('--versus-team',
+    p.add('--versus-team',
           choices=ALLTEAMS,
           action='append',
           help='Specify versus team (use flag multiple times for multiple teams)')
-    k.add('--versus-division',
-          choices=DIVISIONS,
-          action='append',
-          help='Specify versus division (use flag multiple times for multiple divisions)')
-    k.add('--versus-league',
-          choices=LEAGUES,
-          action='append',
-          help='Specify versus league')
 
     # Specify what season data to view
     p.add('--season',
-          required=False,
+          required=True,
           action='append',
-          help='Specify season (use flag multiple times for multiple seasons, no --seasons flag means all data)')
+          help='Specify season (use flag multiple times for multiple seasons)')
+    # Season is required, but day is not
     p.add('--day',
           required=False,
           action='append',
           help='Specify day (use flag multiple times for multiple days, no --days flag means all days)')
 
-    # Restrict to postseason data only
-    p.add('--postseason',
+    # Restrict to playoffs data only
+    p.add('--playoffs',
           action='store_true',
           default=False,
-          help='Restrict game IDs to postseason games only')
+          help='Restrict game IDs to playoffs games only')
 
     # format
     p.add('--text',
@@ -106,40 +88,10 @@ def main(sysargs = sys.argv[1:]):
         print(_program, __version__)
         sys.exit(0)
 
-    # If the user specified a division or a league,
-    # turn that into a list of teams for them
-    if options.division:
-        divteams = []
-        for div in options.division:
-            divteams += division_to_teams(div)
-        options.team = divteams
-        options.division = None
-    if options.league:
-        leateams = []
-        for lea in options.league:
-            leateams += league_to_teams(lea)
-        options.team = leateams
-        options.league = None
-    # Same for versus
-    if options.versus_division:
-        vdivteams = []
-        for div in options.versus_division:
-            vdivteams += division_to_teams(div)
-        options.versus_team = vdivteams
-        options.versus_division = None
-    if options.versus_league:
-        vleateams = []
-        for lea in options.versus_league:
-            vleateams += league_to_teams(lea)
-        options.versus_team = vleateams
-        options.versus_league = None
-
-    # If nothing was supplied for our team/division/league, use all teams
-    if not options.team and not options.division and not options.league:
+    # If nothing was supplied for teams options, use all teams
+    if not options.team:
         options.team = ALLTEAMS
-
-    # If nothing was supplied for versus team/division/league, use all teams
-    if not options.versus_team and not options.versus_division and not options.versus_league:
+    if not options.versus_team:
         options.versus_team = ALLTEAMS
 
     # If nothing was provided for seasons, set it to 'all'

@@ -1,2 +1,2 @@
-blaseball-core-game-data
+requests
 configargparse
