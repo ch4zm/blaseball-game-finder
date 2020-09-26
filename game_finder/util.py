@@ -134,5 +134,5 @@ class CaptureStdout(object):
         sys.stdout = self._stdout
 
     def __repr__(self):
-        """When this context manager is printed, it looks like the game ID string"""
+        """When this context manager is printed, it returns the captured stdout"""
         return self.value
