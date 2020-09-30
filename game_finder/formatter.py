@@ -11,6 +11,7 @@ class BaseFormatter(object):
     def __init__(self, options):
         """Load the data set"""
         self.data = json.loads(gd.get_games_data())
+
         self.options = options
 
         # user provides one-indexed days and seasons
@@ -62,10 +63,6 @@ class BaseFormatter(object):
 
         # use list comprehensions to do fast filtering
         # but first, write the loops explicitly
-
-        # UUUURRRRRGGGGGGGGGGGG for some reason all the Dale 
-        # are getting switched from unicode format (when we import)
-        # to plain string format (below). BUT HOW???
 
         # Seasons filter
         if 'all' not in options.season:
