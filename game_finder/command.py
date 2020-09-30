@@ -95,16 +95,19 @@ def main(sysargs = sys.argv[1:]):
     if len(sysargs)==0:
         p.print_help()
         exit(0)
-
-    # Parse arguments
-    options = p.parse_args(sysargs)
-
-    # If the user asked for the version,
-    # print the version number and exit.
-    if options.version:
+    elif '-v' in sysargs or '--version' in sysargs:
+        # If the user asked for the version,
+        # print the version number and exit.
+        # (Note: this is done separate from
+        # argparse, because otherwise the user
+        # has to ALSO provide a game ID to get
+        # the --version flag to work. ugh.)
         from . import _program, __version__
         print(_program, __version__)
         sys.exit(0)
+
+    # Parse arguments
+    options = p.parse_args(sysargs)
 
     # If the user specified a division or a league,
     # turn that into a list of teams for them
