@@ -10,18 +10,16 @@ data_path = os.path.abspath(os.path.join(root_path, 'data'))
 
 SHORT2LONG_JSON = os.path.join(data_path, "short2long.json")
 
-DALE_SAFE = "Dale" # for command line
-DALE_UTF8 = "Dal\u00e9" # for display
+DALE_SAFE = "Dale"
+DALE_UTF8 = "Dal\u00e9"
 
-FULL_DALE_SAFE = "Miami Dale" # for command line
-FULL_DALE_UTF8 = "Miami Dal\u00e9" # for display
+FULL_DALE_SAFE = "Miami Dale"
+FULL_DALE_UTF8 = "Miami Dal\u00e9"
 
 
 def get_league_division_team_data():
     """
     Get a list of leagues, divisions, and teams.
-    This is for use in creating CLI flag values,
-    so we replace Dal\u00e9 with Dale.
     """
     td = json.loads(gd.get_teams_data())
     leagues = sorted(list(td['leagues'].keys()))
@@ -30,19 +28,16 @@ def get_league_division_team_data():
     for league in leagues:
         teams += td['leagues'][league]
     teams = sorted(list(teams))
-    teams = [sanitize_dale(s) for s in teams]
     return (leagues, divisions, teams)
 
 
 def league_to_teams(league):
     """
     For a given league, return a list of all teams in that league.
-    We replace Dal\u00e9 with Dale (see above).
     """
     td = json.loads(gd.get_teams_data())
     teams = []
     teams += td['leagues'][league]
-    teams = [sanitize_dale(s) for s in teams]
     return teams
 
 
@@ -54,7 +49,6 @@ def division_to_teams(division):
     td = json.loads(gd.get_teams_data())
     teams = []
     teams += td['divisions'][division]
-    teams = [sanitize_dale(s) for s in teams]
     return teams
 
 
@@ -68,16 +62,6 @@ def get_short2long():
         raise FileNotFoundError("Missing team nickname to full name data file: %s"%(SHORT2LONG_JSON))
     return short2long
 
-
-
-def desanitize_dale(s):
-    """Utility function to change sanitized Dale back to unicode"""
-    if s == DALE_SAFE:
-        return DALE_UTF8
-    elif s == FULL_DALE_SAFE:
-        return FULL_DALE_UTF8
-    else:
-        return s
 
 
 def sanitize_dale(s):

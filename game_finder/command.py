@@ -5,7 +5,6 @@ import configargparse
 from io import StringIO
 from .formatter import TextFormatter, JsonFormatter
 from .util import (
-    desanitize_dale,
     get_league_division_team_data,
     league_to_teams,
     division_to_teams,
@@ -17,7 +16,6 @@ def main(sysargs = sys.argv[1:]):
 
     p = configargparse.ArgParser()
 
-    # These are safe for command line usage (no accent in Dale)
     LEAGUES, DIVISIONS, ALLTEAMS = get_league_division_team_data()
 
     p.add('-v',
@@ -159,10 +157,6 @@ def main(sysargs = sys.argv[1:]):
             _ = [int(j) for j in options.day]
         except ValueError:
             raise Exception("Error: you must provide integers to the --day flag: --day 86 --day 99")
-
-    # No more user input required, so convert Dale back to utf8
-    options.team = [desanitize_dale(s) for s in options.team]
-    options.versus_team = [desanitize_dale(s) for s in options.versus_team]
 
     if options.json:
         f = JsonFormatter(options)
