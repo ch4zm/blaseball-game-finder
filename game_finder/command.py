@@ -5,7 +5,7 @@ import configargparse
 from io import StringIO
 from .formatter import TextFormatter, JsonFormatter
 from .util import (
-    get_league_division_team_data,
+    get_all_league_division_team_data,
     league_to_teams,
     division_to_teams,
     CaptureStdout
@@ -16,7 +16,7 @@ def main(sysargs = sys.argv[1:]):
 
     p = configargparse.ArgParser()
 
-    LEAGUES, DIVISIONS, ALLTEAMS = get_league_division_team_data()
+    LEAGUES, DIVISIONS, ALLTEAMS = get_all_league_division_team_data()
 
     p.add('-v',
           '--version',

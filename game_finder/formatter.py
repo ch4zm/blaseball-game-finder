@@ -1,5 +1,4 @@
 import blaseball_core_game_data as gd
-from .util import sanitize_dale, desanitize_dale
 import os
 import time
 import json
