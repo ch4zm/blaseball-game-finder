@@ -48,7 +48,8 @@ for each game that matches the criteria specified with the command line flags.
 ### pip
 
 ```
-pip install git+https://github.com/ch4zm/blaseball-game-finder.git#egg=game_finder
+pip install git+https://github.com/ch4zm/blaseball-core-game-data.git#egg=blaseball_core_game_data
+pip install git+https://github.com/ch4zm/blaseball-game-finder.git#egg=blaseball_game_finder
 ```
 
 ### source
